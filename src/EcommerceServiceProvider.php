@@ -2,6 +2,7 @@
 
 namespace Jmrashed\Ecommerce;
 
+
 use Illuminate\Support\ServiceProvider;
 
 class EcommerceServiceProvider extends ServiceProvider
