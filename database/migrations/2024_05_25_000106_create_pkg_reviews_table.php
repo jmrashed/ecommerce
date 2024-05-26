@@ -17,13 +17,19 @@ class CreatePkgReviewsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('user_id');
-            $table->integer('rating');
+            $table->tinyInteger('rating')->unsigned()->checkBetween(1, 5);
             $table->text('comment')->nullable();
             $table->timestamps();
 
             // Define foreign key constraints
             $table->foreign('product_id')->references('id')->on('pkg_products')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('pkg_users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
+
+        // Optional: Indexing for performance
+        Schema::table('pkg_reviews', function (Blueprint $table) {
+            $table->index('product_id');
+            $table->index('user_id');
         });
     }
 

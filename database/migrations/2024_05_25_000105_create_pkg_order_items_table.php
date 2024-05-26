@@ -18,12 +18,20 @@ class CreatePkgOrderItemsTable extends Migration
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('product_id');
             $table->integer('quantity');
-            $table->decimal('price', 8, 2);
+            $table->decimal('price', 10, 2);
+            $table->decimal('total', 10, 2);
+            $table->string('product_name');
             $table->timestamps();
 
             // Define foreign key constraints
             $table->foreign('order_id')->references('id')->on('pkg_orders')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('pkg_products')->onDelete('cascade');
+        });
+
+        // Optional: Indexing for performance
+        Schema::table('pkg_order_items', function (Blueprint $table) {
+            $table->index('order_id');
+            $table->index('product_id');
         });
     }
 
