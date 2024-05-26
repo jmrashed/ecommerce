@@ -18,6 +18,7 @@ The E-commerce Toolkit for Laravel is a modular package providing essential feat
 
 ## Folder Structure
 
+```tree
 ecommerce
 ├── config
 │   └── ecommerce.php
@@ -65,6 +66,7 @@ ecommerce
 ├── LICENSE
 ├── README.md
 └── CODE_OF_CONDUCT.md
+```
 
 
 
