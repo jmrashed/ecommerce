@@ -3,6 +3,7 @@
 namespace Jmrashed\Ecommerce\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
 
 class InstallEcommercePackage extends Command
@@ -30,7 +31,6 @@ class InstallEcommercePackage extends Command
     {
         $this->info('Installing Ecommerce package...');
 
-        $this->info('Publishing configuration...');
 
         if (!$this->configExists('ecommerce.php')) {
             $this->publishConfiguration();
@@ -66,45 +66,61 @@ class InstallEcommercePackage extends Command
     private function shouldOverwriteConfig()
     {
         return $this->confirm(
-            'Config file already exists. Do you want to overwrite it?',
+            'File already exists. Do you want to overwrite it?',
             false
         );
     }
 
     /**
-     * Publish the configuration file.
+     * Publish the configuration file and other resources.
      *
      * @param bool $forcePublish
      * @return void
      */
-
-
     private function publishConfiguration($forcePublish = false)
     {
-        $params = [
-            '--provider' => "Jmrashed\Ecommerce\EcommerceServiceProvider",
-            '--tag' => "config"
-        ];
-
-        if ($forcePublish === true) {
-            $params['--force'] = true;
-        }
-
-        $this->call('vendor:publish', $params);
         $resources = [
+            'config' => ['--tag' => 'config'],
             'views' => ['--tag' => 'views'],
-            'routes' => ['--tag' => 'routes'],
-            'migrations' => ['--tag' => 'migrations'],
             'assets' => ['--tag' => 'assets'],
+            'lang' => ['--tag' => 'lang']
         ];
 
         foreach ($resources as $resourceType => $params) {
             if ($forcePublish === true) {
                 $params['--force'] = true;
             }
-
             $this->call('vendor:publish', $params);
-            $this->info("Published {$resourceType} for Ecommerce package");
+
+            //     Log::info("Resource '$resourceType'");
+            // if (!$this->resourceExists($resourceType)) {
+            //     Log::info("params '$params'");
+            //     $this->info("Published {$resourceType} for Ecommerce package");
+            // } else {
+            //     $this->info("Existing {$resourceType} was not overwritten");
+            // }
+        }
+    }
+
+    /**
+     * Check if the resource already exists.
+     *
+     * @param string $resourceType
+     * @return bool
+     */
+    private function resourceExists($resourceType)
+    {
+        switch ($resourceType) {
+            case 'config':
+                return File::exists(config_path('ecommerce.php'));
+            case 'views':
+                return File::exists(resource_path('views/vendor/jmrashed/ecommerce'));
+            case 'assets':
+                return File::exists(public_path('vendor/jmrashed/ecommerce'));
+            case 'lang':
+                return File::exists(resource_path('lang/vendor/jmrashed/ecommerce'));
+            default:
+                return false;
         }
     }
 }

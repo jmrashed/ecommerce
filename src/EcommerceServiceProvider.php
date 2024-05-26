@@ -39,41 +39,26 @@ class EcommerceServiceProvider extends ServiceProvider
             __DIR__ . '/../config/ecommerce.php' => config_path('ecommerce.php'),
         ], 'config');
 
-        // Publish assets
-        $this->publishes([
-            __DIR__ . '/../resources/assets' => public_path('vendor/ecommerce'),
-        ], 'assets');
 
         // Publish views
         $this->publishes([
-            __DIR__ . '/../resources/views' => resource_path('views/vendor/ecommerce'),
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/jmrashed/ecommerce'),
         ], 'views');
 
         // Publish translations
         $this->publishes([
-            __DIR__ . '/../resources/lang' => resource_path('lang/vendor/ecommerce'),
+            __DIR__ . '/../resources/lang' => resource_path('lang/vendor/jmrashed/ecommerce'),
         ], 'lang');
 
 
 
-        // Publish views
-        $this->publishes([
-            __DIR__ . '/../resources/views' => resource_path('views/vendor/ecommerce'),
-        ], 'views');
-
-        // Publish routes
-        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
-
-        // Publish migrations
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-
-
-
-
         // Publish assets
-        $this->publishes([
-            __DIR__ . '/../resources/assets' => public_path('vendor/jmrashed/ecommerce'),
-        ], 'assets');
+        $this->publishes(
+            [
+                __DIR__ . '/../resources/assets' => public_path('vendor/jmrashed/ecommerce'),
+            ],
+            'assets'
+        );
     }
 
     /**
