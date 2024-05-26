@@ -54,15 +54,21 @@ ecommerce
 ├── src
 │   ├── Console
 │   │   └── Commands
+│   │       └──InstallEcommercePackage.php
 │   ├── Http
 │   │   ├── Controllers
 │   │   │   └── ProductController.php
 │   │   └── Middleware
 │   │       └── CheckCart.php
 │   ├── Models
+│   │   └── Brand.php
+│   │   └── Category.php
+│   │   └── Customer.php
+│   │   └── OrderItem.php
 │   │   └── Product.php
+│   │   └── Review.php 
 │   ├── Providers
-│   │   └── EcommerceServiceProvider.php
+├── ├── EcommerceServiceProvider.php
 │   ├── Repositories
 │   │   └── ProductRepository.php
 │   └── Services
