@@ -1,6 +1,6 @@
 <?php
 
-namespace Jmrashed\Ecommerce\Middleware;
+namespace Jmrashed\Ecommerce\Http\Middleware;
 
 use Closure;
 
