@@ -77,6 +77,8 @@ class InstallEcommercePackage extends Command
      * @param bool $forcePublish
      * @return void
      */
+
+
     private function publishConfiguration($forcePublish = false)
     {
         $params = [
@@ -89,5 +91,20 @@ class InstallEcommercePackage extends Command
         }
 
         $this->call('vendor:publish', $params);
+        $resources = [
+            'views' => ['--tag' => 'views'],
+            'routes' => ['--tag' => 'routes'],
+            'migrations' => ['--tag' => 'migrations'],
+            'assets' => ['--tag' => 'assets'],
+        ];
+
+        foreach ($resources as $resourceType => $params) {
+            if ($forcePublish === true) {
+                $params['--force'] = true;
+            }
+
+            $this->call('vendor:publish', $params);
+            $this->info("Published {$resourceType} for Ecommerce package");
+        }
     }
 }

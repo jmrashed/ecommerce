@@ -53,6 +53,27 @@ class EcommerceServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../resources/lang' => resource_path('lang/vendor/ecommerce'),
         ], 'lang');
+
+
+
+        // Publish views
+        $this->publishes([
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/ecommerce'),
+        ], 'views');
+
+        // Publish routes
+        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+
+        // Publish migrations
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+
+
+
+
+        // Publish assets
+        $this->publishes([
+            __DIR__ . '/../resources/assets' => public_path('vendor/jmrashed/ecommerce'),
+        ], 'assets');
     }
 
     /**
