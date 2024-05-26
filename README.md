@@ -26,7 +26,13 @@ ecommerce
 │   ├── factories
 │   │   └── ProductFactory.php
 │   ├── migrations
-│   │   └── 2024_05_25_000000_create_products_table.php
+│   │   └── 2024_05_25_000099_create_pkg_customers_table.php
+│   │   └── 2024_05_25_000100_create_pkg_brands_table.php
+│   │   └── 2024_05_25_000101_create_pkg_categories_table.php
+│   │   └── 2024_05_25_000102_create_pkg_products_table.php
+│   │   └── 2024_05_25_000103_create_pkg_orders_table.php
+│   │   └── 2024_05_25_000105_create_pkg_order_items_table.php
+│   │   └── 2024_05_25_000106_create_pkg_reviews_table.php 
 │   └── seeders
 │       └── DatabaseSeeder.php
 ├── resources
