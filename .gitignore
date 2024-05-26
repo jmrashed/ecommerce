@@ -1,0 +1,37 @@
+# Ignore vendor directory
+/vendor/
+
+# Ignore .env file
+.env
+
+# Ignore IDE and editor files
+/.idea/
+/.vscode/
+
+# Ignore Homestead and Vagrant files
+Homestead.json
+Homestead.yaml
+Vagrantfile
+
+# Ignore log files
+/storage/logs/*.log
+
+# Ignore user-specific files
+/.phpunit.result.cache
+/phpunit.xml
+
+# Ignore system-specific files
+/.DS_Store
+/.env.*
+/.vagrant
+/.envrc
+/.env.development.local
+/.env.local
+/.env.production.local
+.env.testing.local
+.env.testing
+.env.staging.local
+.env.staging
+
+# Ignore composer dependencies
+/composer.phar

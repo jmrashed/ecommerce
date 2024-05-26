@@ -16,6 +16,58 @@ The E-commerce Toolkit for Laravel is a modular package providing essential feat
 - **Multi-language and Currency Support**: Cater to a global audience with localization features.
 - **Responsive Design**: Ensure a seamless experience across all devices.
 
+## Folder Structure
+
+ecommerce
+├── config
+│   └── ecommerce.php
+├── database
+│   ├── factories
+│   │   └── ProductFactory.php
+│   ├── migrations
+│   │   └── 2024_05_25_000000_create_products_table.php
+│   └── seeders
+│       └── DatabaseSeeder.php
+├── resources
+│   ├── assets
+│   │   ├── css
+│   │   │   └── ecommerce.css
+│   │   └── js
+│   │       └── ecommerce.js
+│   ├── lang
+│   │   └── en
+│   │       └── ecommerce.php
+│   └── views
+│       ├── layouts
+│       │   └── app.blade.php
+│       └── products
+│           └── index.blade.php
+├── routes
+│   └── web.php
+├── src
+│   ├── Console
+│   │   └── Commands
+│   ├── Http
+│   │   ├── Controllers
+│   │   │   └── ProductController.php
+│   │   └── Middleware
+│   │       └── CheckCart.php
+│   ├── Models
+│   │   └── Product.php
+│   ├── Providers
+│   │   └── EcommerceServiceProvider.php
+│   ├── Repositories
+│   │   └── ProductRepository.php
+│   └── Services
+│       └── ProductService.php 
+├── .gitignore
+├── composer.json
+├── LICENSE
+├── README.md
+└── CODE_OF_CONDUCT.md
+
+
+
 ## Installation
 
 To install the package, use Composer:
