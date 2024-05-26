@@ -21,6 +21,11 @@
             "Database\\Factories\\Jmrashed\\Ecommerce\\": "database/factories"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Jmrashed\\Ecommerce\\Tests\\": "tests"
+        }
+    },
     "authors": [
         {
             "name": "RASHED",
@@ -48,5 +53,9 @@
                 "Jmrashed\\Ecommerce\\EcommerceServiceProvider"
             ]
         }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5",
+        "orchestra/testbench": "^8.23"
     }
 }

@@ -4,6 +4,7 @@ namespace Jmrashed\Ecommerce;
 
 
 use Illuminate\Support\ServiceProvider;
+use Jmrashed\Ecommerce\Console\Commands\InstallEcommercePackage;
 
 class EcommerceServiceProvider extends ServiceProvider
 {
@@ -14,6 +15,13 @@ class EcommerceServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Register the command if we are using the application via the CLI
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                InstallEcommercePackage::class,
+            ]);
+        }
+
         // Load routes
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
 
