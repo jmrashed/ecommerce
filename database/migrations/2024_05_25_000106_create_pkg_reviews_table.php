@@ -22,8 +22,8 @@ class CreatePkgReviewsTable extends Migration
             $table->timestamps();
 
             // Define foreign key constraints
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('pkg_products')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('pkg_users')->onDelete('cascade');
         });
     }
 
