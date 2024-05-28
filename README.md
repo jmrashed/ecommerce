@@ -84,18 +84,92 @@ ecommerce
 
 ```mermaid
 graph TD
-    A[Product] --> B[Category]
-    A --> C[Brand]
-    A --> D[Review]
-    A --> E[OrderItem]
-    A --> F[Order]
-    A --> G[Customer]
-    B --> H[Product]
-    C --> H
-    D --> H
-    E --> H
-    F --> H
-    G --> H
+    subgraph Catalog
+        A[Product] --> B[Category]
+        A --> C[Brand]
+        B --> A
+        C --> A
+    end
+    
+    subgraph Customer
+        G[Customer] --> I[Cart]
+        G --> J[Wishlist]
+        G --> K[Address]
+        I --> G
+        J --> G
+        K --> G
+    end
+    
+    subgraph OrderManagement
+        F[Order] --> L[Payment]
+        F --> M[Shipping]
+        L --> F
+        M --> F
+    end
+    
+    subgraph ReviewManagement
+        D[Review] --> A
+        D --> G
+    end
+    
+    subgraph Inventory
+        N[Warehouse] --> A
+        O[Stock] --> N
+        N --> O
+    end
+    
+    subgraph Search
+        P[SearchService] --> A
+        P --> B
+        P --> C
+        P --> D
+    end
+    
+    subgraph Recommendation
+        Q[RecommendationEngine] --> A
+        Q --> G
+        Q --> D
+    end
+    
+    subgraph Analytics
+        R[AnalyticsEngine] --> G
+        R --> A
+        R --> F
+        R --> D
+        R --> B
+    end
+    
+    subgraph Notifications
+        S[NotificationService] --> G
+        S --> F
+    end
+    
+    subgraph UserInterface
+        T[WebApp] --> G
+        T --> A
+        T --> I
+        T --> F
+        T --> P
+        T --> Q
+        T --> S
+        T --> R
+        T --> D
+        T --> B
+        T --> C
+    end
+    
+    subgraph AdminInterface
+        U[AdminPanel] --> A
+        U --> B
+        U --> C
+        U --> F
+        U --> N
+        U --> O
+        U --> R
+    end
+    
+    T -.-> U
+
 ```
 
 ## Installation
