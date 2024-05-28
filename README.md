@@ -172,6 +172,48 @@ graph TD
 
 ```
 
+
+### Use Case Diagram
+
+```mermaid
+usecase Customer as C
+usecase Product as P
+usecase Cart as Ca
+usecase Wishlist as W
+usecase Order as O
+usecase Payment as Pa
+usecase Shipping as S
+usecase Review as R
+usecase Search as Se
+usecase Recommendation as Re
+usecase Analytics as A
+usecase Notification as N
+usecase Admin as Ad
+
+C --> P
+C --> Ca
+C --> W
+C --> O
+O --> Pa
+O --> S
+P --> R
+P --> Se
+P --> Re
+P --> A
+P --> N
+Ad --> P
+Ad --> C
+Ad --> O
+Ad --> Pa
+Ad --> S
+Ad --> R
+Ad --> Se
+Ad --> Re
+Ad --> A
+Ad --> N
+```
+
+
 ## Installation
 
 To install the package, use Composer:
