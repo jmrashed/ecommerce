@@ -176,41 +176,61 @@ graph TD
 ### Use Case Diagram
 
 ```mermaid
-usecase Customer as C
-usecase Product as P
-usecase Cart as Ca
-usecase Wishlist as W
-usecase Order as O
-usecase Payment as Pa
-usecase Shipping as S
-usecase Review as R
-usecase Search as Se
-usecase Recommendation as Re
-usecase Analytics as A
-usecase Notification as N
-usecase Admin as Ad
+graph TB
+  subgraph CustomerUseCases
+    C[Customer] --> P[View Products]
+    C --> Ca[Manage Cart]
+    C --> W[Manage Wishlist]
+    C --> O[Place Order]
+    O --> Pa[Make Payment]
+    O --> S[Track Shipping]
+    C --> R[Write Review]
+    C --> Se[Search Products]
+    C --> Re[Get Recommendations]
+  end
 
-C --> P
-C --> Ca
-C --> W
-C --> O
-O --> Pa
-O --> S
-P --> R
-P --> Se
-P --> Re
-P --> A
-P --> N
-Ad --> P
-Ad --> C
-Ad --> O
-Ad --> Pa
-Ad --> S
-Ad --> R
-Ad --> Se
-Ad --> Re
-Ad --> A
-Ad --> N
+  subgraph AdminUseCases
+    Ad[Admin] --> P
+    Ad --> C[Manage Customers]
+    Ad --> O[Manage Orders]
+    Ad --> Pa[Manage Payments]
+    Ad --> S[Manage Shipping]
+    Ad --> R[Moderate Reviews]
+    Ad --> Se[Manage Search]
+    Ad --> Re[Manage Recommendations]
+    Ad --> A[View Analytics]
+    Ad --> N[Send Notifications]
+  end
+
+  subgraph Services
+    Pa
+    S
+    Se
+    Re
+    A
+    N
+  end
+
+  %% Service interactions
+  P --> Se
+  P --> Re
+  P --> A
+  P --> N
+  O --> Pa
+  O --> S
+
+  %% Admin-Services relations
+  Ad --> P
+  Ad --> C
+  Ad --> O
+  Ad --> Pa
+  Ad --> S
+  Ad --> R
+  Ad --> Se
+  Ad --> Re
+  Ad --> A
+  Ad --> N
+
 ```
 
 
