@@ -233,6 +233,53 @@ graph TB
 
 ```
 
+### Database Design 
+
+```mermaid
+erDiagram
+    CUSTOMER ||..|| CART : has
+    CUSTOMER ||..|| WISHLIST : has
+    CUSTOMER ||--|| ADDRESS : has
+    CUSTOMER ||--|| ORDER : places
+    ORDER ||--|| PAYMENT : has
+    ORDER ||--|| SHIPPING : has
+    PRODUCT ||--|| CATEGORY : belongs to
+    PRODUCT ||--|| BRAND : belongs to
+    PRODUCT ||--|| REVIEW : has
+    WAREHOUSE ||--|| STOCK : has
+    SEARCHSERVICE ||--|| PRODUCT : searches
+    SEARCHSERVICE ||--|| CATEGORY : searches
+    SEARCHSERVICE ||--|| BRAND : searches
+    SEARCHSERVICE ||--|| REVIEW : searches
+    RECOMMENDATIONENGINE ||--|| PRODUCT : recommends
+    RECOMMENDATIONENGINE ||--|| CUSTOMER : recommends
+    RECOMMENDATIONENGINE ||--|| REVIEW : recommends
+    ANALYTICSENGINE ||--|| CUSTOMER : analyzes
+    ANALYTICSENGINE ||--|| PRODUCT : analyzes
+    ANALYTICSENGINE ||--|| ORDER : analyzes
+    ANALYTICSENGINE ||--|| REVIEW : analyzes
+    ANALYTICSENGINE ||--|| CATEGORY : analyzes
+    NOTIFICATIONSERVICE ||--|| CUSTOMER : notifies
+    NOTIFICATIONSERVICE ||--|| ORDER : notifies
+    WEBAPP ||--|| CUSTOMER : uses
+    WEBAPP ||--|| PRODUCT : uses
+    WEBAPP ||--|| CART : uses
+    WEBAPP ||--|| ORDER : uses
+    WEBAPP ||--|| SEARCHSERVICE : uses
+    WEBAPP ||--|| RECOMMENDATIONENGINE : uses
+    WEBAPP ||--|| NOTIFICATIONSERVICE : uses
+    WEBAPP ||--|| ANALYTICSENGINE : uses
+    WEBAPP ||--|| REVIEW : uses
+    WEBAPP ||--|| CATEGORY : uses
+    ADMINPANEL ||--|| PRODUCT : uses
+    ADMINPANEL ||--|| CATEGORY : uses
+    ADMINPANEL ||--|| BRAND : uses
+    ADMINPANEL ||--|| ORDER : uses
+    ADMINPANEL ||--|| WAREHOUSE : uses
+    ADMINPANEL ||--|| STOCK : uses
+    ADMINPANEL ||--|| ANALYTICSENGINE : uses
+```
+
 
 ## Installation
 
