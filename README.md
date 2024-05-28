@@ -237,48 +237,47 @@ graph TB
 
 ```mermaid
 erDiagram
-    CUSTOMER ||--|| CART : has
-    CUSTOMER ||--|| WISHLIST : has
-    CUSTOMER ||--|| ADDRESS : has
-    CUSTOMER ||--|| ORDER : places
-    ORDER ||--|| PAYMENT : has
-    ORDER ||--|| SHIPPING : has
-    PRODUCT ||--|| CATEGORY : belongs to
-    PRODUCT ||--|| BRAND : belongs to
-    PRODUCT ||--|| REVIEW : has
-    WAREHOUSE ||--|| STOCK : stores
-    SEARCHSERVICE ||--|| PRODUCT : searches
-    SEARCHSERVICE ||--|| CATEGORY : searches
-    SEARCHSERVICE ||--|| BRAND : searches
-    SEARCHSERVICE ||--|| REVIEW : searches
-    RECOMMENDATIONENGINE ||--|| PRODUCT : recommends
-    RECOMMENDATIONENGINE ||--|| CUSTOMER : recommends
-    RECOMMENDATIONENGINE ||--|| REVIEW : recommends
-    ANALYTICSENGINE ||--|| CUSTOMER : analyzes
-    ANALYTICSENGINE ||--|| PRODUCT : analyzes
-    ANALYTICSENGINE ||--|| ORDER : analyzes
-    ANALYTICSENGINE ||--|| REVIEW : analyzes
-    ANALYTICSENGINE ||--|| CATEGORY : analyzes
-    NOTIFICATIONSERVICE ||--|| CUSTOMER : notifies
-    NOTIFICATIONSERVICE ||--|| ORDER : notifies
-    WEBAPP ||--|| CUSTOMER : uses
-    WEBAPP ||--|| PRODUCT : uses
-    WEBAPP ||--|| CART : uses
-    WEBAPP ||--|| ORDER : uses
-    WEBAPP ||--|| SEARCHSERVICE : uses
-    WEBAPP ||--|| RECOMMENDATIONENGINE : uses
-    WEBAPP ||--|| NOTIFICATIONSERVICE : uses
-    WEBAPP ||--|| ANALYTICSENGINE : uses
-    WEBAPP ||--|| REVIEW : uses
-    WEBAPP ||--|| CATEGORY : uses
-    ADMINPANEL ||--|| PRODUCT : manages
-    ADMINPANEL ||--|| CATEGORY : manages
-    ADMINPANEL ||--|| BRAND : manages
-    ADMINPANEL ||--|| ORDER : manages
-    ADMINPANEL ||--|| WAREHOUSE : manages
-    ADMINPANEL ||--|| STOCK : manages
-    ADMINPANEL ||--|| ANALYTICSENGINE : uses
-
+    CUSTOMER ||--o{ CART : "has"
+    CUSTOMER ||--o{ WISHLIST : "has"
+    CUSTOMER ||--o{ ADDRESS : "has"
+    CUSTOMER ||--o{ ORDER : "places"
+    ORDER ||--o{ PAYMENT : "has"
+    ORDER ||--o{ SHIPPING : "has"
+    PRODUCT }o--|| CATEGORY : "belongs to"
+    PRODUCT }o--|| BRAND : "belongs to"
+    PRODUCT ||--o{ REVIEW : "has"
+    WAREHOUSE ||--o{ STOCK : "stores"
+    SEARCHSERVICE ||--o{ PRODUCT : "searches"
+    SEARCHSERVICE ||--o{ CATEGORY : "searches"
+    SEARCHSERVICE ||--o{ BRAND : "searches"
+    SEARCHSERVICE ||--o{ REVIEW : "searches"
+    RECOMMENDATIONENGINE ||--o{ PRODUCT : "recommends"
+    RECOMMENDATIONENGINE ||--o{ CUSTOMER : "recommends"
+    RECOMMENDATIONENGINE ||--o{ REVIEW : "uses"
+    ANALYTICSENGINE ||--o{ CUSTOMER : "analyzes"
+    ANALYTICSENGINE ||--o{ PRODUCT : "analyzes"
+    ANALYTICSENGINE ||--o{ ORDER : "analyzes"
+    ANALYTICSENGINE ||--o{ REVIEW : "analyzes"
+    ANALYTICSENGINE ||--o{ CATEGORY : "analyzes"
+    NOTIFICATIONSERVICE ||--o{ CUSTOMER : "notifies"
+    NOTIFICATIONSERVICE ||--o{ ORDER : "notifies"
+    WEBAPP ||--o{ CUSTOMER : "uses"
+    WEBAPP ||--o{ PRODUCT : "uses"
+    WEBAPP ||--o{ CART : "uses"
+    WEBAPP ||--o{ ORDER : "uses"
+    WEBAPP ||--o{ SEARCHSERVICE : "uses"
+    WEBAPP ||--o{ RECOMMENDATIONENGINE : "uses"
+    WEBAPP ||--o{ NOTIFICATIONSERVICE : "uses"
+    WEBAPP ||--o{ ANALYTICSENGINE : "uses"
+    WEBAPP ||--o{ REVIEW : "uses"
+    WEBAPP ||--o{ CATEGORY : "uses"
+    ADMINPANEL ||--o{ PRODUCT : "manages"
+    ADMINPANEL ||--o{ CATEGORY : "manages"
+    ADMINPANEL ||--o{ BRAND : "manages"
+    ADMINPANEL ||--o{ ORDER : "manages"
+    ADMINPANEL ||--o{ WAREHOUSE : "manages"
+    ADMINPANEL ||--o{ STOCK : "manages"
+    ADMINPANEL ||--o{ ANALYTICSENGINE : "uses"
 ```
 
 
