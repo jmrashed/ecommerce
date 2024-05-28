@@ -237,8 +237,8 @@ graph TB
 
 ```mermaid
 erDiagram
-    CUSTOMER ||..|| CART : has
-    CUSTOMER ||..|| WISHLIST : has
+    CUSTOMER ||--|| CART : has
+    CUSTOMER ||--|| WISHLIST : has
     CUSTOMER ||--|| ADDRESS : has
     CUSTOMER ||--|| ORDER : places
     ORDER ||--|| PAYMENT : has
@@ -246,7 +246,7 @@ erDiagram
     PRODUCT ||--|| CATEGORY : belongs to
     PRODUCT ||--|| BRAND : belongs to
     PRODUCT ||--|| REVIEW : has
-    WAREHOUSE ||--|| STOCK : has
+    WAREHOUSE ||--|| STOCK : stores
     SEARCHSERVICE ||--|| PRODUCT : searches
     SEARCHSERVICE ||--|| CATEGORY : searches
     SEARCHSERVICE ||--|| BRAND : searches
@@ -271,13 +271,14 @@ erDiagram
     WEBAPP ||--|| ANALYTICSENGINE : uses
     WEBAPP ||--|| REVIEW : uses
     WEBAPP ||--|| CATEGORY : uses
-    ADMINPANEL ||--|| PRODUCT : uses
-    ADMINPANEL ||--|| CATEGORY : uses
-    ADMINPANEL ||--|| BRAND : uses
-    ADMINPANEL ||--|| ORDER : uses
-    ADMINPANEL ||--|| WAREHOUSE : uses
-    ADMINPANEL ||--|| STOCK : uses
+    ADMINPANEL ||--|| PRODUCT : manages
+    ADMINPANEL ||--|| CATEGORY : manages
+    ADMINPANEL ||--|| BRAND : manages
+    ADMINPANEL ||--|| ORDER : manages
+    ADMINPANEL ||--|| WAREHOUSE : manages
+    ADMINPANEL ||--|| STOCK : manages
     ADMINPANEL ||--|| ANALYTICSENGINE : uses
+
 ```
 
 
