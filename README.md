@@ -80,20 +80,23 @@ ecommerce
 └── CODE_OF_CONDUCT.md
 ```
 
-2024_05_25_000099_create_pkg_addresses_table.php
-2024_05_25_000099_create_pkg_customers_table.php
-2024_05_25_000100_create_pkg_brands_table.php
-2024_05_25_000101_create_pkg_categories_table.php
-2024_05_25_000102_create_pkg_product_images_table.php
-2024_05_25_000102_create_pkg_products_table.php
-2024_05_25_000102_create_pkg_tags_table.php
-2024_05_25_000103_create_pkg_orders_table.php
-2024_05_25_000105_create_pkg_order_items_table.php
-2024_05_25_000106_create_pkg_reviews_table.php
-2024_05_25_000107_create_pkg_coupons_table.php
-2024_05_25_000107_create_pkg_payments_table.php
-2024_05_25_000107_create_pkg_shippings_table.php
-2024_05_25_000107_create_pkg_wishlists_table.php
+### Dataflow Diagram
+
+```mermaid
+graph TD
+    A[Product] --> B[Category]
+    A --> C[Brand]
+    A --> D[Review]
+    A --> E[OrderItem]
+    A --> F[Order]
+    A --> G[Customer]
+    B --> H[Product]
+    C --> H
+    D --> H
+    E --> H
+    F --> H
+    G --> H
+```
 
 ## Installation
 
