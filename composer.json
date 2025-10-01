@@ -59,9 +59,9 @@
         "orchestra/testbench": "^8.23"
     },
     "scripts": {
-        "test": "php vendor/phpunit/phpunit/phpunit",
-        "test:coverage": "php vendor/phpunit/phpunit/phpunit --coverage-html coverage",
-        "test:unit": "php vendor/phpunit/phpunit/phpunit --testsuite=Unit",
-        "test:feature": "php vendor/phpunit/phpunit/phpunit --testsuite=Feature"
+        "test": "vendor/bin/phpunit",
+        "test:coverage": "vendor/bin/phpunit --coverage-html coverage",
+        "test:unit": "vendor/bin/phpunit --testsuite=Unit",
+        "test:feature": "vendor/bin/phpunit --testsuite=Feature"
     }
 }

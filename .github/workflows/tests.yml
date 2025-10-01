@@ -8,24 +8,41 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     
     strategy:
       matrix:
-        php: [8.1, 8.2]
+        php: [8.1, 8.2, 8.3]
         laravel: [10.*, 11.*]
         
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php }}
-        extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite
+        extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, openssl
+        coverage: xdebug
+        
+    - name: Validate composer.json and composer.lock
+      run: composer validate --strict
+        
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v3
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-
         
     - name: Install dependencies
-      run: composer install --prefer-dist --no-progress
+      run: composer install --prefer-dist --no-progress --no-suggest
       
     - name: Run tests
-      run: vendor/bin/phpunit
+      run: composer test
+      
+    - name: Run tests with coverage
+      if: matrix.php == '8.3' && matrix.laravel == '11.*'
+      run: composer test:coverage

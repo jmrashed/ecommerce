@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Fixed
+- Fixed GitHub Actions workflow OpenSSL compatibility issues
+- Updated CI environment to Ubuntu 22.04 for better stability
+- Improved composer test scripts for cross-platform compatibility
+- Added PHP 8.3 support and enhanced test matrix
+- Added composer validation and caching to CI pipeline
+
 ## [2.1.2] - 2025-01-27
 
 ### Changed
