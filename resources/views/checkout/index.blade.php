@@ -45,6 +45,7 @@
                         <label for="shipping_address">Shipping Address</label>
                         <textarea name="shipping_address" id="shipping_address" class="form-control" rows="3" required>{{ old('shipping_address', Auth::check() && Auth::user()->addresses->first() ? Auth::user()->addresses->first()->full_address : '') }}</textarea>
                     </div>
+                        @include('checkout.shipping_select', ['shippingMethods' => $shippingMethods])
                     <div class="form-group">
                         <label for="billing_address">Billing Address</label>
                         <textarea name="billing_address" id="billing_address" class="form-control" rows="3" required>{{ old('billing_address', Auth::check() && Auth::user()->addresses->first() ? Auth::user()->addresses->first()->full_address : '') }}</textarea>

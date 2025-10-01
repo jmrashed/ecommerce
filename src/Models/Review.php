@@ -1,5 +1,4 @@
 <?php
-
 namespace Jmrashed\Ecommerce\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,10 +9,10 @@ class Review extends Model
 {
     use HasFactory;
 
-    protected $table = "pkg_reviews";
+    protected $table    = "pkg_reviews";
     protected $fillable = [
         'product_id',
-        'customer_id',
+        'user_id',
         'rating',
         'comment',
     ];
@@ -23,8 +22,8 @@ class Review extends Model
         return $this->belongsTo(Product::class);
     }
 
-    public function customer(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(User::class);
     }
 }

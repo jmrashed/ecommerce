@@ -1,22 +1,24 @@
 <?php
-
 namespace Jmrashed\Ecommerce\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Jmrashed\Ecommerce\Models\Order;
 use Jmrashed\Ecommerce\Services\CartService;
 use Jmrashed\Ecommerce\Services\OrderService;
-use Jmrashed\Ecommerce\Models\Order;
-use Illuminate\Support\Facades\Auth;
+use Jmrashed\Ecommerce\Services\PaymentService;
 
 class CheckoutController extends Controller
 {
     protected $cartService;
     protected $orderService;
+    protected $paymentService;
 
-    public function __construct(CartService $cartService, OrderService $orderService)
+    public function __construct(CartService $cartService, OrderService $orderService, PaymentService $paymentService)
     {
-        $this->cartService = $cartService;
-        $this->orderService = $orderService;
+        $this->cartService    = $cartService;
+        $this->orderService   = $orderService;
+        $this->paymentService = $paymentService;
     }
 
     /**
@@ -34,7 +36,8 @@ class CheckoutController extends Controller
 
         $totalAmount = $cartItems->sum(fn($item) => $item->price * $item->quantity);
 
-        return view('checkout.index', compact('cartItems', 'totalAmount'));
+        $shippingMethods = \Ecommerce\Models\Shipping::where('active', true)->get();
+        return view('checkout.index', compact('cartItems', 'totalAmount', 'shippingMethods'));
     }
 
     /**
@@ -47,21 +50,32 @@ class CheckoutController extends Controller
     {
         $request->validate([
             'shipping_address' => 'required|string|max:255',
-            'billing_address' => 'required|string|max:255',
-            'payment_method' => 'required|string', // e.g., 'stripe', 'paypal'
+            'billing_address'  => 'required|string|max:255',
+            'payment_method'   => 'required|string', // e.g., 'stripe', 'paypal'
         ]);
 
-        $customer = Auth::user();
+        $customer  = Auth::user();
         $cartItems = $this->cartService->getCartItems();
 
         if ($cartItems->isEmpty()) {
             return redirect()->route('cart.index')->with('error', 'Your cart is empty.');
         }
 
-        $order = $this->orderService->createOrder($customer, $cartItems, $request->all());
+        // Get selected shipping method and cost
+        $shipping                        = \Ecommerce\Models\Shipping::find($request->shipping_method);
+        $shippingCost                    = $shipping ? $shipping->cost : 0;
+        $orderData                       = $request->all();
+        $orderData['shipping_method_id'] = $shipping ? $shipping->id : null;
+        $orderData['shipping_cost']      = $shippingCost;
+        $order                           = $this->orderService->createOrder($customer, $cartItems, $orderData);
 
-        // Clear the cart after successful order creation
-        // $this->cartService->clearCart($customer); // Assuming a clearCart method in CartService
+        try {
+            $this->paymentService->processPayment($order, $request->payment_method, $request->all());
+        } catch (\Exception $e) {
+            // Handle payment failure (e.g., update order status, redirect back with error)
+            $order->update(['payment_status' => 'failed']);
+            return redirect()->back()->with('error', 'Payment failed: ' . $e->getMessage());
+        }
 
         return redirect()->route('checkout.confirmation', $order)->with('success', 'Order placed successfully!');
     }

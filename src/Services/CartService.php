@@ -1,13 +1,33 @@
 <?php
-
 namespace Jmrashed\Ecommerce\Services;
 
+use Illuminate\Support\Facades\Auth;
 use Jmrashed\Ecommerce\Models\CartItem;
 use Jmrashed\Ecommerce\Models\Product;
-use Illuminate\Support\Facades\Auth;
 
 class CartService
 {
+    /**
+     * Calculate the total price with coupon discount applied.
+     *
+     * @param  \Illuminate\Database\Eloquent\Collection  $cartItems
+     * @param  \Ecommerce\Models\Coupon|null  $coupon
+     * @return float
+     */
+    public function getTotalWithDiscount($cartItems, $coupon = null)
+    {
+        $total = $cartItems->sum(function ($item) {
+            return $item->price * $item->quantity;
+        });
+        if ($coupon && $coupon->isValid()) {
+            if ($coupon->discount_type === 'fixed') {
+                $total -= $coupon->discount_amount;
+            } elseif ($coupon->discount_type === 'percent') {
+                $total -= ($total * ($coupon->discount_amount / 100));
+            }
+        }
+        return max($total, 0);
+    }
     /**
      * Get the current user's cart items.
      *
@@ -33,7 +53,7 @@ class CartService
      */
     public function addToCart(Product $product, int $quantity)
     {
-        if (!Auth::check()) {
+        if (! Auth::check()) {
             // Handle guest cart logic (e.g., store in session)
             // For now, we'll assume a logged-in user is required.
             throw new \Exception('User must be logged in to add items to cart.');
@@ -47,8 +67,8 @@ class CartService
         } else {
             $cartItem = Auth::user()->cartItems()->create([
                 'product_id' => $product->id,
-                'quantity' => $quantity,
-                'price' => $product->price, // Store current price at the time of adding to cart
+                'quantity'   => $quantity,
+                'price'      => $product->price, // Store current price at the time of adding to cart
             ]);
         }
 

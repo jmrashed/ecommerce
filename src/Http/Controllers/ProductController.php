@@ -3,10 +3,10 @@
 namespace Jmrashed\Ecommerce\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Jmrashed\Ecommerce\Services\ProductService;
-use Jmrashed\Ecommerce\Models\Product;
-use Jmrashed\Ecommerce\Models\Category;
 use Jmrashed\Ecommerce\Models\Brand;
+use Jmrashed\Ecommerce\Models\Category;
+use Jmrashed\Ecommerce\Models\Product;
+use Jmrashed\Ecommerce\Services\ProductService;
 
 class ProductController extends Controller
 {
