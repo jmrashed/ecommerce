@@ -40,9 +40,22 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-suggest
       
+    - name: Make test script executable
+      run: chmod +x run-tests.sh
+      
     - name: Run tests
-      run: composer test
+      run: |
+        if [ -f "vendor/bin/phpunit" ]; then
+          vendor/bin/phpunit
+        else
+          php vendor/phpunit/phpunit/phpunit
+        fi
       
     - name: Run tests with coverage
       if: matrix.php == '8.3' && matrix.laravel == '11.*'
-      run: composer test:coverage
+      run: |
+        if [ -f "vendor/bin/phpunit" ]; then
+          vendor/bin/phpunit --coverage-html coverage
+        else
+          php vendor/phpunit/phpunit/phpunit --coverage-html coverage
+        fi
