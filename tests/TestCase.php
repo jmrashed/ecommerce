@@ -1,6 +1,6 @@
 <?php
 
-namespace Jmrashed\Ecommerce\Tests\Unit;
+namespace Jmrashed\Ecommerce\Tests;
 
 use Jmrashed\Ecommerce\EcommerceServiceProvider;
 

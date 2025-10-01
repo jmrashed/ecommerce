@@ -2,7 +2,7 @@
 
 namespace Jmrashed\Ecommerce\Tests\Feature;
 
-use Jmrashed\Ecommerce\Tests\Unit\TestCase;
+use Jmrashed\Ecommerce\Tests\TestCase;
 
 class ExampleTest extends TestCase
 {

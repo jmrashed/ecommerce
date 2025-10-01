@@ -15,6 +15,12 @@ All notable changes to this project will be documented in this file.
 - Added sponsors section and professional footer
 - Restructured content for better readability and trust
 
+### Fixed
+- Fixed PHPUnit test configuration and namespace issues
+- Added proper test structure with Unit and Feature test suites
+- Added composer test scripts for easier test execution
+- Created meaningful test examples for Product model and ServiceProvider
+
 ## [2.1.1] - 2025-01-27
 
 ### Added
